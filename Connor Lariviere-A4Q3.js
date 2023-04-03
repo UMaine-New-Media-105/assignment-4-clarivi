@@ -1,6 +1,6 @@
 function setup() {
   createCanvas(2000, 2000);
-  
+
   //Fireworks are set up using javascript objects. They have properties
   // of x and y position, their scale, their colors, and the amount of lines they have.
   firework1 = {
@@ -61,54 +61,60 @@ firework7 = {
 };
 
 function draw() {
-  noLoop()
+  noLoop();
   background(0);
   for (let row = 0; row < 5; row++) {
-    push()
-    for (let column = 0; column < 5; column++) { //for every tile:
-      
+    push();
+    for (let column = 0; column < 5; column++) {
+      //for every tile:
+
       //add 'stars'
-      ellipse(random(0,400),random(0,400),5)
-      ellipse(random(0,400),random(0,400),5)
-      ellipse(random(0,400),random(0,400),5)
-      ellipse(random(0,400),random(0,400),5)
-      ellipse(random(0,400),random(0,400),5)
-      ellipse(random(0,400),random(0,400),5)
+      addStar(5);
+      addStar(7);
+      addStar(5);
+      addStar(3);
+      addStar(8);
+      addStar(2);
+
       
       addFirework(firework1);
       addFirework(firework2);
       addFirework(firework3);
       addFirework(firework4);
       addFirework(firework5);
-      if(random() >= 0.5){  //randomly draws one of two extra fireworks
-        addFirework(firework6)
-      }
-      else addFirework(firework7)
-      
+      if (random() >= 0.5) {
+        //randomly draws one of two extra fireworks
+        addFirework(firework6);
+      } else addFirework(firework7);
+
       translate(400, 0);
     }
-    pop() //
-    translate(0,400);
+    pop(); //
+    translate(0, 400);
   }
 }
 
 function addFirework(firework) {
   push();
-  colorsLength = floor(random(0,firework.colors.length - 1)) //randomizes what element of the list the firework starts at.
+  colorsLength = floor(random(0, firework.colors.length - 1)); //randomizes what element of the list the firework starts at.
   let colorIndex = colorsLength;
-  translate(firework.x + random(-5,5), firework.y + random(-30,30)); //random firework position
-  scale(firework.size * random(0.8,1.2)); //random firework size
-  
-  for (let i = 0; i < firework.lines; i++) { 
+  translate(firework.x + random(-5, 5), firework.y + random(-30, 30)); //random firework position
+  scale(firework.size * random(0.8, 1.2)); //random firework size
+
+  for (let i = 0; i < firework.lines; i++) {
     //draws each of the firework lines
     rotate(360 / firework.lines);
     stroke(firework.colors[colorIndex]);
-    line(0, 0, 0, 40 + random(-2,2)); //slightly randomizes how long each line of the firework is.
+    line(0, 0, 0, 40 + random(-2, 2)); //slightly randomizes how long each line of the firework is.
     if (colorIndex === firework.colors.length - 1) {
       //draws the lines in order of colors put in colors array
       colorIndex = 0;
     } else colorIndex = colorIndex + 1;
   }
-  
+
   pop();
+}
+
+function addStar(size){
+  ellipse(random(0,400),random(0,400),size)
 }
