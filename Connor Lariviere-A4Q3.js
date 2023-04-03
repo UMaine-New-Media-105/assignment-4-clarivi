@@ -65,7 +65,16 @@ function draw() {
   background(0);
   for (let row = 0; row < 5; row++) {
     push()
-    for (let column = 0; column < 5; column++) {
+    for (let column = 0; column < 5; column++) { //for every tile:
+      
+      //add 'stars'
+      ellipse(random(0,400),random(0,400),5)
+      ellipse(random(0,400),random(0,400),5)
+      ellipse(random(0,400),random(0,400),5)
+      ellipse(random(0,400),random(0,400),5)
+      ellipse(random(0,400),random(0,400),5)
+      ellipse(random(0,400),random(0,400),5)
+      
       addFirework(firework1);
       addFirework(firework2);
       addFirework(firework3);
@@ -75,6 +84,7 @@ function draw() {
         addFirework(firework6)
       }
       else addFirework(firework7)
+      
       translate(400, 0);
     }
     pop() //
@@ -86,8 +96,8 @@ function addFirework(firework) {
   push();
   colorsLength = floor(random(0,firework.colors.length - 1)) //randomizes what element of the list the firework starts at.
   let colorIndex = colorsLength;
-  translate(firework.x, firework.y);
-  scale(firework.size);
+  translate(firework.x + random(-5,5), firework.y + random(-30,30)); //random firework position
+  scale(firework.size * random(0.8,1.2)); //random firework size
   
   for (let i = 0; i < firework.lines; i++) { 
     //draws each of the firework lines
